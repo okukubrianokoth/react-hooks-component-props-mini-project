@@ -1,18 +1,12 @@
+import "@testing-library/jest-dom";
 import React from "react";
+import { render } from "@testing-library/react";
 import App from "../components/App";
-import Header from "../components/Header";
-import About from "../components/About";
-import ArticleList from "../components/ArticleList";
 
-
-function App() {
-  return (
-    <div className="App"> {/* ✅ This makes .App selector work */}
-      <Header name={blogData.name} />
-      <About image={blogData.image} about={blogData.about} />
-      <ArticleList posts={blogData.posts} />
-    </div>
-  );
-}
-
-export default App;
+test("renders the App container and main sections", () => {
+  const { container } = render(<App />);
+  expect(container.querySelector(".App")).toBeInTheDocument();
+  expect(container.querySelector(".App header")).toBeInTheDocument();
+  expect(container.querySelector(".App aside")).toBeInTheDocument();
+  expect(container.querySelector(".App main")).toBeInTheDocument();
+});
